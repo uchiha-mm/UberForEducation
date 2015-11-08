@@ -9,9 +9,10 @@ app.controller('AuthController', function($scope, $location, toaster, Auth) {
 	$scope.register = function(user) {
     console.log("inside controller")
     Auth.register(user)
-      .then(function() {
+      .then(function(data) {
+          console.log(data);
         toaster.pop('success', "Registered successfully");
-        $location.path('/');
+        $location.path('/' );
       }, function(err) {
         console.log(err)
         toaster.pop('error', "Oops! Something went wrong.");

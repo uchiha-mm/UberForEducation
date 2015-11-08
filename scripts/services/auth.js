@@ -13,7 +13,9 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase) {
       var profile = {
         name: user.name,
         email: user.email,
-        gravatar: get_gravatar(user.email, 40)
+        age: user.age,
+        gender: user.gender,
+        role: user.role
       };
 
       var profileRef = $firebase(ref.child('profile'));
@@ -28,7 +30,7 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase) {
 
     register: function(user) {
       console.log("Inside service" + user.email)
-      return auth.$createUser({email: user.email, password: user.password})
+      return auth.$createUser({email: user.email, password: user.password, age: user.age, gender: user.gender, role: user.role})
         .then(function() {
           // authenticate so we have permission to write to Firebase
 
@@ -44,9 +46,9 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase) {
       auth.$unauth();
     },
 
-		changePassword: function(user) {
+    changePassword: function(user) {
 			return auth.$changePassword({email: user.email, oldPassword: user.oldPass, newPassword: user.newPass});
-		},
+	},
 
     signedIn: function() {
       return !!Auth.user.provider; //using !! means (0, undefined, null, etc) = false | otherwise = true

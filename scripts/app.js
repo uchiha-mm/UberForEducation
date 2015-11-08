@@ -7,7 +7,7 @@ var app = angular
     'ngRoute',    
     'firebase'
   ])
-  .constant('FURL', 'https://.firebaseio.com/')  
+  .constant('FURL', 'https://uberforeducation1.firebaseio.com/')  
   .config(function ($routeProvider) {
     $routeProvider      
       .when('/', {
